@@ -1,0 +1,82 @@
+###
+POST http://localhost:3000/user/register HTTP/1.1
+Content-Type: application/json
+api_key: prueba_api_random
+
+{
+"email": "test106@test.com",
+"password": "password1"
+}
+###
+
+PUT http://localhost:3000/user/validation
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2N2U5OGUwNjQwMTQzYzBkZGI2ZGYyZjkiLCJyb2xlIjoidXNlciIsImlhdCI6MTc0MzM1OTQ5NCwiZXhwIjoxNzQzMzY2Njk0fQ.2hHS_dyraE7pltl94_DRazqpwRlAxrrp1zovrS1w_LE
+
+{
+  "codigo": 621992
+}
+
+###
+POST http://localhost:3000/user/login
+Content-Type: application/json
+
+{
+  "email": "test106@test.com",
+  "password": "password1"
+}
+
+###
+
+### Actualizar datos personales del usuario
+PUT http://localhost:3000/user/register
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2N2U5OGUwNjQwMTQzYzBkZGI2ZGYyZjkiLCJyb2xlIjoidXNlciIsImlhdCI6MTc0MzM1OTU1MCwiZXhwIjoxNzQzMzY2NzUwfQ.nz1A9kBV-Ts9cbqGktpSEn5Rokq8fa1wwn7VuESfA3A
+
+{
+  "name": "José",
+  "surnames": "García Pérez",
+  "nif": "40000001W"
+}
+
+###
+
+PATCH http://localhost:3000/user/company
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2N2U5OGUwNjQwMTQzYzBkZGI2ZGYyZjkiLCJyb2xlIjoidXNlciIsImlhdCI6MTc0MzM1OTU1MCwiZXhwIjoxNzQzMzY2NzUwfQ.nz1A9kBV-Ts9cbqGktpSEn5Rokq8fa1wwn7VuESfA3A
+
+{
+  "company": {
+    "name": "Servitop2, SL.",
+    "cif": "BXXXXXXXY",
+    "street": "Carlos V",
+    "number": 22,
+    "postal": 28936,
+    "city": "Móstoles",
+    "province": "Madrid"
+  }
+}
+
+###
+PATCH http://localhost:3000/user/logo
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2N2U5OGUwNjQwMTQzYzBkZGI2ZGYyZjkiLCJyb2xlIjoidXNlciIsImlhdCI6MTc0MzM1OTU1MCwiZXhwIjoxNzQzMzY2NzUwfQ.nz1A9kBV-Ts9cbqGktpSEn5Rokq8fa1wwn7VuESfA3A
+Content-Type: multipart/form-data; boundary=----ejemplo
+
+------ejemplo
+Content-Disposition: form-data; name="logo"; filename="logo1.png"
+Content-Type: image/png
+
+< C:\Users\Usuario\Downloads\logo1.png
+------ejemplo--
+###
+
+GET http://localhost:3000/user
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2N2U5OGUwNjQwMTQzYzBkZGI2ZGYyZjkiLCJyb2xlIjoidXNlciIsImlhdCI6MTc0MzM1OTU1MCwiZXhwIjoxNzQzMzY2NzUwfQ.nz1A9kBV-Ts9cbqGktpSEn5Rokq8fa1wwn7VuESfA3A
+###
+DELETE http://localhost:3000/user?soft=true
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2N2U5OGUwNjQwMTQzYzBkZGI2ZGYyZjkiLCJyb2xlIjoidXNlciIsImlhdCI6MTc0MzM1OTU1MCwiZXhwIjoxNzQzMzY2NzUwfQ.nz1A9kBV-Ts9cbqGktpSEn5Rokq8fa1wwn7VuESfA3A
+###
+DELETE http://localhost:3000/user?soft=false
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2N2U5OGUwNjQwMTQzYzBkZGI2ZGYyZjkiLCJyb2xlIjoidXNlciIsImlhdCI6MTc0MzM1OTU1MCwiZXhwIjoxNzQzMzY2NzUwfQ.nz1A9kBV-Ts9cbqGktpSEn5Rokq8fa1wwn7VuESfA3A
+###
+
