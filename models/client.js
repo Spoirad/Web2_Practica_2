@@ -7,24 +7,21 @@ const clientSchema = new mongoose.Schema({
     },
     cif: {
         type: String,
-        required: true, unique: true
-    },
-    email: {
-        type: String
-
-    },
-    phone: {
-        type: String
-
-    },
-    address: {
-        type: String
+        required: true,
+        unique: true
     },
     archived: {
         type: Boolean,
         default: false
     },
-    owner: { type: mongoose.Schema.Types.ObjectId, ref: "user", required: true }
+    companyCIF: {
+        type: String
+    },
+    owner: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "user",
+        required: true
+    }
 }, {
     timestamps: true,
     versionKey: false

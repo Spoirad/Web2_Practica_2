@@ -80,3 +80,37 @@ DELETE http://localhost:3000/user?soft=false
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2N2U5OGUwNjQwMTQzYzBkZGI2ZGYyZjkiLCJyb2xlIjoidXNlciIsImlhdCI6MTc0MzM1OTU1MCwiZXhwIjoxNzQzMzY2NzUwfQ.nz1A9kBV-Ts9cbqGktpSEn5Rokq8fa1wwn7VuESfA3A
 ###
 
+### cosas practica 2
+
+###
+POST http://localhost:3000/client
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2ODA3NmUyMzI1MGNjODhkY2IwYjdhNjAiLCJyb2xlIjoidXNlciIsImlhdCI6MTc0NTQ4NjcyOCwiZXhwIjoxNzQ1NDkzOTI4fQ.d1M8OCsOda15LxoJtOMDysb8kiElTHohmKLSIOJgqao
+Content-Type: application/json
+
+{
+  "name": "Cliente Ejemplo 2",
+  "cif": "B12345658"
+}
+###
+PATCH http://localhost:3000/client/680a03d36ce4cee6b5de7371
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2ODA3NmUyMzI1MGNjODhkY2IwYjdhNjAiLCJyb2xlIjoidXNlciIsImlhdCI6MTc0NTQ4NjcyOCwiZXhwIjoxNzQ1NDkzOTI4fQ.d1M8OCsOda15LxoJtOMDysb8kiElTHohmKLSIOJgqao
+Content-Type: application/json
+
+{
+  "name": "Nuevo nombre"
+}
+###
+GET http://localhost:3000/client
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2ODA3NmUyMzI1MGNjODhkY2IwYjdhNjAiLCJyb2xlIjoidXNlciIsImlhdCI6MTc0NTQ4NjcyOCwiZXhwIjoxNzQ1NDkzOTI4fQ.d1M8OCsOda15LxoJtOMDysb8kiElTHohmKLSIOJgqao
+###
+GET http://localhost:3000/client/680a09472adc0bd9e9c8d744
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2ODA3NmUyMzI1MGNjODhkY2IwYjdhNjAiLCJyb2xlIjoidXNlciIsImlhdCI6MTc0NTQ4NjcyOCwiZXhwIjoxNzQ1NDkzOTI4fQ.d1M8OCsOda15LxoJtOMDysb8kiElTHohmKLSIOJgqao
+###
+DELETE http://localhost:3000/client/680a09472adc0bd9e9c8d744?soft=true
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2ODA3NmUyMzI1MGNjODhkY2IwYjdhNjAiLCJyb2xlIjoidXNlciIsImlhdCI6MTc0NTQ4NjcyOCwiZXhwIjoxNzQ1NDkzOTI4fQ.d1M8OCsOda15LxoJtOMDysb8kiElTHohmKLSIOJgqao
+###
+GET http://localhost:3000/client/archived
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2ODA3NmUyMzI1MGNjODhkY2IwYjdhNjAiLCJyb2xlIjoidXNlciIsImlhdCI6MTc0NTQ4NjcyOCwiZXhwIjoxNzQ1NDkzOTI4fQ.d1M8OCsOda15LxoJtOMDysb8kiElTHohmKLSIOJgqao
+###
+PATCH http://localhost:3000/client/680a09472adc0bd9e9c8d744/restore
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2ODA3NmUyMzI1MGNjODhkY2IwYjdhNjAiLCJyb2xlIjoidXNlciIsImlhdCI6MTc0NTQ4NjcyOCwiZXhwIjoxNzQ1NDkzOTI4fQ.d1M8OCsOda15LxoJtOMDysb8kiElTHohmKLSIOJgqao
