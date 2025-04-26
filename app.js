@@ -1,12 +1,15 @@
 const express = require("express");
 const cors = require("cors");
 require('dotenv').config();
+const { swaggerDocs } = require("./swagger");
 
 const dbConnect = require('./config/mongo.js');
 const router = require('./routes/index.js')
 
+
 const app = express();
 
+swaggerDocs(app)
 // Le decimos a la app de express() que use cors para evitar el error Cross-Domain (XD)
 app.use(cors());
 app.use(express.json());

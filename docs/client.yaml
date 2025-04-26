@@ -1,0 +1,157 @@
+paths:
+  /client:
+    post:
+      tags:
+        - Client
+      summary: Crear un nuevo cliente
+      security:
+        - bearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                cif:
+                  type: string
+                email:
+                  type: string
+                phone:
+                  type: string
+                address:
+                  type: string
+      responses:
+        201:
+          description: Cliente creado
+        409:
+          description: Cliente ya existente
+        400:
+          description: Validación incorrecta
+
+    get:
+      tags:
+        - Client
+      summary: Obtener todos los clientes del usuario o su empresa
+      security:
+        - bearerAuth: []
+      responses:
+        200:
+          description: Lista de clientes
+
+  /client/{id}:
+    get:
+      tags:
+        - Client
+      summary: Obtener un cliente por ID
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        200:
+          description: Cliente encontrado
+        403:
+          description: No autorizado
+        404:
+          description: No encontrado
+
+    patch:
+      tags:
+        - Client
+      summary: Actualizar un cliente existente
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                cif:
+                  type: string
+                email:
+                  type: string
+                phone:
+                  type: string
+                address:
+                  type: string
+      responses:
+        200:
+          description: Cliente actualizado
+        403:
+          description: No autorizado
+        404:
+          description: Cliente no encontrado
+
+    delete:
+      tags:
+        - Client
+      summary: Eliminar un cliente (soft o hard)
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: soft
+          in: query
+          required: false
+          schema:
+            type: boolean
+      responses:
+        200:
+          description: Cliente eliminado o archivado
+        403:
+          description: No autorizado
+        404:
+          description: Cliente no encontrado
+
+  /client/archived:
+    get:
+      tags:
+        - Client
+      summary: Obtener todos los clientes archivados del usuario o su empresa
+      security:
+        - bearerAuth: []
+      responses:
+        200:
+          description: Lista de clientes archivados
+
+  /client/{id}/restore:
+    patch:
+      tags:
+        - Client
+      summary: Restaurar un cliente archivado
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        200:
+          description: Cliente restaurado
+        403:
+          description: No autorizado
+        404:
+          description: Cliente no archivado o no encontrado

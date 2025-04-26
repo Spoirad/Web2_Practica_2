@@ -114,3 +114,43 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2ODA3NmUyM
 ###
 PATCH http://localhost:3000/client/680a09472adc0bd9e9c8d744/restore
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2ODA3NmUyMzI1MGNjODhkY2IwYjdhNjAiLCJyb2xlIjoidXNlciIsImlhdCI6MTc0NTQ4NjcyOCwiZXhwIjoxNzQ1NDkzOTI4fQ.d1M8OCsOda15LxoJtOMDysb8kiElTHohmKLSIOJgqao
+###
+POST http://localhost:3000/project
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2ODA3NmUyMzI1MGNjODhkY2IwYjdhNjAiLCJyb2xlIjoidXNlciIsImlhdCI6MTc0NTY3OTIwNCwiZXhwIjoxNzQ1Njg2NDA0fQ.ohvV1BK_w2Ahf_-ZoKp1Ql36uDucWI6KO5ak5ERWJCo
+Content-Type: application/json
+
+{
+  "name": "Proyecto Ejemplo",
+  "description": "Proyecto de construcción de edificio",
+  "address": "Calle Mayor 15",
+  "postalCode": "28001",
+  "city": "Madrid",
+  "client": "680a09472adc0bd9e9c8d744"
+}
+###
+GET http://localhost:3000/project
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2ODA3NmUyMzI1MGNjODhkY2IwYjdhNjAiLCJyb2xlIjoidXNlciIsImlhdCI6MTc0NTY3OTIwNCwiZXhwIjoxNzQ1Njg2NDA0fQ.ohvV1BK_w2Ahf_-ZoKp1Ql36uDucWI6KO5ak5ERWJCo
+###
+GET http://localhost:3000/project/680cf38fcf67aaa3e91c3d0a
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2ODA3NmUyMzI1MGNjODhkY2IwYjdhNjAiLCJyb2xlIjoidXNlciIsImlhdCI6MTc0NTY3OTIwNCwiZXhwIjoxNzQ1Njg2NDA0fQ.ohvV1BK_w2Ahf_-ZoKp1Ql36uDucWI6KO5ak5ERWJCo
+###
+PATCH http://localhost:3000/project/680cf38fcf67aaa3e91c3d0a
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2ODA3NmUyMzI1MGNjODhkY2IwYjdhNjAiLCJyb2xlIjoidXNlciIsImlhdCI6MTc0NTY3OTIwNCwiZXhwIjoxNzQ1Njg2NDA0fQ.ohvV1BK_w2Ahf_-ZoKp1Ql36uDucWI6KO5ak5ERWJCo
+Content-Type: application/json
+
+{
+  "name": "Nuevo nombre del proyecto",
+  "address": "Nueva dirección",
+  "postalCode": "28045"
+}
+###
+### En el de DELETE si quieres hacerlo soft asi sirve , sino añades ?soft=false
+###
+DELETE http://localhost:3000/project/680cf38fcf67aaa3e91c3d0a
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2ODA3NmUyMzI1MGNjODhkY2IwYjdhNjAiLCJyb2xlIjoidXNlciIsImlhdCI6MTc0NTY3OTIwNCwiZXhwIjoxNzQ1Njg2NDA0fQ.ohvV1BK_w2Ahf_-ZoKp1Ql36uDucWI6KO5ak5ERWJCo
+###
+GET http://localhost:3000/project/archived
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2ODA3NmUyMzI1MGNjODhkY2IwYjdhNjAiLCJyb2xlIjoidXNlciIsImlhdCI6MTc0NTY3OTIwNCwiZXhwIjoxNzQ1Njg2NDA0fQ.ohvV1BK_w2Ahf_-ZoKp1Ql36uDucWI6KO5ak5ERWJCo
+###
+PATCH http://localhost:3000/project/680cf38fcf67aaa3e91c3d0a/restore
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2ODA3NmUyMzI1MGNjODhkY2IwYjdhNjAiLCJyb2xlIjoidXNlciIsImlhdCI6MTc0NTY3OTIwNCwiZXhwIjoxNzQ1Njg2NDA0fQ.ohvV1BK_w2Ahf_-ZoKp1Ql36uDucWI6KO5ak5ERWJCo

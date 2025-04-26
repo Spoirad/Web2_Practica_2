@@ -1,0 +1,168 @@
+paths:
+  /project:
+    post:
+      tags:
+        - Project
+      summary: Crear un nuevo proyecto
+      security:
+        - bearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - name
+                - client
+              properties:
+                name:
+                  type: string
+                description:
+                  type: string
+                address:
+                  type: string
+                postalCode:
+                  type: string
+                city:
+                  type: string
+                client:
+                  type: string
+                  description: ID del cliente
+      responses:
+        201:
+          description: Proyecto creado correctamente
+        409:
+          description: Proyecto ya existente
+        404:
+          description: Cliente no válido
+        400:
+          description: Validación incorrecta
+
+    get:
+      tags:
+        - Project
+      summary: Obtener todos los proyectos
+      security:
+        - bearerAuth: []
+      responses:
+        200:
+          description: Lista de proyectos del usuario o de su empresa
+
+  /project/archived:
+    get:
+      tags:
+        - Project
+      summary: Obtener todos los proyectos archivados
+      security:
+        - bearerAuth: []
+      responses:
+        200:
+          description: Lista de proyectos archivados
+
+  /project/{id}:
+    get:
+      tags:
+        - Project
+      summary: Obtener un proyecto específico
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: ID del proyecto
+          schema:
+            type: string
+      responses:
+        200:
+          description: Proyecto encontrado
+        403:
+          description: No autorizado
+        404:
+          description: Proyecto no encontrado
+
+    patch:
+      tags:
+        - Project
+      summary: Actualizar un proyecto
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: ID del proyecto
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                description:
+                  type: string
+                address:
+                  type: string
+                postalCode:
+                  type: string
+                city:
+                  type: string
+      responses:
+        200:
+          description: Proyecto actualizado correctamente
+        403:
+          description: No autorizado
+        404:
+          description: Proyecto no encontrado
+
+    delete:
+      tags:
+        - Project
+      summary: Eliminar (soft o hard) un proyecto
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: soft
+          in: query
+          required: false
+          description: "Si es false, se elimina permanentemente"
+          schema:
+            type: boolean
+      responses:
+        200:
+          description: Proyecto eliminado o archivado
+        403:
+          description: No autorizado
+        404:
+          description: Proyecto no encontrado
+
+  /project/{id}/restore:
+    patch:
+      tags:
+        - Project
+      summary: Restaurar un proyecto archivado
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        200:
+          description: Proyecto restaurado correctamente
+        403:
+          description: No autorizado
+        404:
+          description: Proyecto no encontrado o no archivado
