@@ -28,7 +28,7 @@ const uploadToPinata = async (fileBuffer, fileName) => {
         if(!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
 
         const responseData = await response.json();
-        return responseData;
+        return `https://ipfs.io/ipfs/${responseData.IpfsHash}`;
     } catch (error) {
         console.error('Error uploading to Pinata:', error);
         throw error;

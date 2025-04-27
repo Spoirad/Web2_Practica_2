@@ -1,0 +1,213 @@
+paths:
+  /user/register:
+    post:
+      tags:
+        - User
+      summary: Registro de nuevo usuario
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - email
+                - password
+              properties:
+                email:
+                  type: string
+                password:
+                  type: string
+      responses:
+        201:
+          description: Usuario registrado correctamente
+        409:
+          description: Email ya en uso
+        400:
+          description: Error de validación
+
+    put:
+      tags:
+        - User
+      summary: Completar datos personales del usuario
+      security:
+        - bearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - name
+                - surnames
+                - nif
+              properties:
+                name:
+                  type: string
+                surnames:
+                  type: string
+                nif:
+                  type: string
+      responses:
+        200:
+          description: Datos personales actualizados
+        400:
+          description: Validación incorrecta
+        403:
+          description: No autorizado
+
+  /user/validation:
+    put:
+      tags:
+        - User
+      summary: Validar el email de usuario
+      security:
+        - bearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - codigo
+              properties:
+                codigo:
+                  type: number
+      responses:
+        200:
+          description: Email validado correctamente
+        400:
+          description: Código incorrecto o máximo intentos alcanzados
+        403:
+          description: No autorizado
+        404:
+          description: Usuario no encontrado
+
+  /user/login:
+    post:
+      tags:
+        - User
+      summary: Login de usuario
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - email
+                - password
+              properties:
+                email:
+                  type: string
+                password:
+                  type: string
+      responses:
+        200:
+          description: Usuario logueado correctamente
+        400:
+          description: Credenciales inválidas
+
+  /user/company:
+    patch:
+      tags:
+        - User
+      summary: Añadir datos de la compañía
+      security:
+        - bearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                company:
+                  type: object
+                  required:
+                    - name
+                    - cif
+                    - street
+                    - number
+                    - postal
+                    - city
+                    - province
+                  properties:
+                    name:
+                      type: string
+                    cif:
+                      type: string
+                    street:
+                      type: string
+                    number:
+                      type: number
+                    postal:
+                      type: number
+                    city:
+                      type: string
+                    province:
+                      type: string
+      responses:
+        200:
+          description: Compañía añadida correctamente
+        400:
+          description: Error de validación
+        409:
+          description: CIF de empresa ya existente
+
+  /user/logo:
+    patch:
+      tags:
+        - User
+      summary: Subir logo de la compañía
+      security:
+        - bearerAuth: []
+      consumes:
+        - multipart/form-data
+      requestBody:
+        required: true
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                logo:
+                  type: string
+                  format: binary
+      responses:
+        200:
+          description: Logo subido correctamente
+        400:
+          description: Error subiendo logo
+
+  /user:
+    get:
+      tags:
+        - User
+      summary: Obtener datos del perfil del usuario
+      security:
+        - bearerAuth: []
+      responses:
+        200:
+          description: Datos del usuario
+
+    delete:
+      tags:
+        - User
+      summary: Borrar usuario
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: soft
+          in: query
+          required: false
+          schema:
+            type: boolean
+          description: "Soft delete si true, hard delete si false"
+      responses:
+        200:
+          description: Usuario eliminado correctamente
+        400:
+          description: Error eliminando usuario

@@ -1,0 +1,172 @@
+paths:
+  /deliverynote:
+    post:
+      tags:
+        - DeliveryNote
+      summary: Crear un nuevo albarán
+      security:
+        - bearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - client
+                - project
+              properties:
+                client:
+                  type: string
+                  description: ID del cliente
+                project:
+                  type: string
+                  description: ID del proyecto
+                description:
+                  type: string
+                materials:
+                  type: array
+                  items:
+                    type: object
+                    properties:
+                      description:
+                        type: string
+                      quantity:
+                        type: number
+                      unit:
+                        type: string
+                      price:
+                        type: number
+                hours:
+                  type: array
+                  items:
+                    type: object
+                    properties:
+                      worker:
+                        type: string
+                      hours:
+                        type: number
+                      pricePerHour:
+                        type: number
+                totalCost:
+                  type: number
+      responses:
+        201:
+          description: Albarán creado correctamente
+        400:
+          description: Error de validación
+        404:
+          description: Cliente o proyecto no encontrado
+
+    get:
+      tags:
+        - DeliveryNote
+      summary: Obtener todos los albaranes
+      security:
+        - bearerAuth: []
+      responses:
+        200:
+          description: Lista de albaranes
+
+  /deliverynote/{id}:
+    get:
+      tags:
+        - DeliveryNote
+      summary: Obtener un albarán específico
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+          description: ID del albarán
+      responses:
+        200:
+          description: Albarán encontrado
+        403:
+          description: No autorizado
+        404:
+          description: Albarán no encontrado
+
+    delete:
+      tags:
+        - DeliveryNote
+      summary: Borrar un albarán
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+          description: ID del albarán
+      responses:
+        200:
+          description: Albarán eliminado
+        400:
+          description: No se puede eliminar un albarán firmado
+        403:
+          description: No autorizado
+        404:
+          description: Albarán no encontrado
+
+  /deliverynote/pdf/{id}:
+    get:
+      tags:
+        - DeliveryNote
+      summary: Generar PDF de un albarán
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+          description: ID del albarán
+      responses:
+        200:
+          description: PDF generado
+        403:
+          description: No autorizado
+        404:
+          description: Albarán no encontrado
+
+  /deliverynote/{id}/signature:
+    patch:
+      tags:
+        - DeliveryNote
+      summary: Subir firma para un albarán
+      security:
+        - bearerAuth: []
+      consumes:
+        - multipart/form-data
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+          description: ID del albarán
+      requestBody:
+        required: true
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                signature:
+                  type: string
+                  format: binary
+      responses:
+        200:
+          description: Firma subida correctamente
+        400:
+          description: El albarán ya está firmado
+        403:
+          description: No autorizado
+        404:
+          description: Albarán no encontrado

@@ -154,3 +154,42 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2ODA3NmUyM
 ###
 PATCH http://localhost:3000/project/680cf38fcf67aaa3e91c3d0a/restore
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2ODA3NmUyMzI1MGNjODhkY2IwYjdhNjAiLCJyb2xlIjoidXNlciIsImlhdCI6MTc0NTY3OTIwNCwiZXhwIjoxNzQ1Njg2NDA0fQ.ohvV1BK_w2Ahf_-ZoKp1Ql36uDucWI6KO5ak5ERWJCo
+###
+POST http://localhost:3000/deliverynote
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2ODA3NmUyMzI1MGNjODhkY2IwYjdhNjAiLCJyb2xlIjoidXNlciIsImlhdCI6MTc0NTc1NDgyNiwiZXhwIjoxNzQ1NzYyMDI2fQ.d9fI6B1UO7tj0Rrhy51WL63BzmMh1e3cRKPxHvSIT7Y
+Content-Type: application/json
+
+{
+  "client": "680a09472adc0bd9e9c8d744",
+  "project": "680cf38fcf67aaa3e91c3d0a",
+  "description": "Instalación eléctrica de oficinas",
+  "materials": [
+    {
+      "description": "Cableado eléctrico",
+      "quantity": 200,
+      "unit": "metros",
+      "price": 0.5
+    }
+  ],
+  "hours": [
+    {
+      "worker": "Juan Pérez",
+      "hours": 8,
+      "pricePerHour": 20
+    }
+  ],
+  "totalCost": 300
+}
+###
+GET http://localhost:3000/deliverynote
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2ODA3NmUyMzI1MGNjODhkY2IwYjdhNjAiLCJyb2xlIjoidXNlciIsImlhdCI6MTc0NTY5NTA2NywiZXhwIjoxNzQ1NzAyMjY3fQ.f2es_E22ui1aHsTvHSRS1wyQcPVFLbK4G3z8qpok8TQ
+###
+GET http://localhost:3000/deliverynote/680d3181481be742e6cd1b16
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2ODA3NmUyMzI1MGNjODhkY2IwYjdhNjAiLCJyb2xlIjoidXNlciIsImlhdCI6MTc0NTc1NDgyNiwiZXhwIjoxNzQ1NzYyMDI2fQ.d9fI6B1UO7tj0Rrhy51WL63BzmMh1e3cRKPxHvSIT7Y
+###
+GET http://localhost:3000/deliverynote/pdf/680d3181481be742e6cd1b16
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2ODA3NmUyMzI1MGNjODhkY2IwYjdhNjAiLCJyb2xlIjoidXNlciIsImlhdCI6MTc0NTc1NDgyNiwiZXhwIjoxNzQ1NzYyMDI2fQ.d9fI6B1UO7tj0Rrhy51WL63BzmMh1e3cRKPxHvSIT7Y
+###
+DELETE http://localhost:3000/deliverynote/680e1e907cb5c5c394b29d15
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2ODA3NmUyMzI1MGNjODhkY2IwYjdhNjAiLCJyb2xlIjoidXNlciIsImlhdCI6MTc0NTc1NDgyNiwiZXhwIjoxNzQ1NzYyMDI2fQ.d9fI6B1UO7tj0Rrhy51WL63BzmMh1e3cRKPxHvSIT7Y
+###
