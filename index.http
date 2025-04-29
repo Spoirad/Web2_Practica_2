@@ -193,3 +193,7 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2ODA3NmUyM
 DELETE http://localhost:3000/deliverynote/680e1e907cb5c5c394b29d15
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2ODA3NmUyMzI1MGNjODhkY2IwYjdhNjAiLCJyb2xlIjoidXNlciIsImlhdCI6MTc0NTc1NDgyNiwiZXhwIjoxNzQ1NzYyMDI2fQ.d9fI6B1UO7tj0Rrhy51WL63BzmMh1e3cRKPxHvSIT7Y
 ###
+###Este ultimo es para probar que el slack funciona correctamente
+###
+GET http://localhost:3000/testSlack/test-error
+###

@@ -1,5 +1,10 @@
-const handleHttpError = (res, message, code = 403) => {  // code 403 solo aplica si no ha tercera variable mandada a httperror
-    res.status(code).send(message);
-}
+const { sendSlackError } = require("./sendSlackError");
 
-module.exports = { handleHttpError }
+const handleHttpError = (res, message = "Error", code = 403) => {
+    if (code >= 500) {
+        sendSlackError(`${message} - Código ${code}`);
+    }
+    res.status(code).json({ error: true, message });
+};
+
+module.exports = { handleHttpError };
