@@ -50,7 +50,7 @@ const userScheme = new mongoose.Schema({
     //Información de la empresa
     company: {
         name: { type: String, required: false },
-        cif: { type: String, required: false, unique: true }, //el cif debe ser unico, el DNI de una empresa basicamente
+        cif: { type: String, required: false }, //el cif debe no debe ser unico, distintos user pueden tener misma conpany
         street: { type: String, required: false },
         number: { type: Number, required: false },
         postal: { type: Number, required: false },

@@ -4,17 +4,17 @@ Content-Type: application/json
 api_key: prueba_api_random
 
 {
-"email": "test106@test.com",
+"email": "test211@test.com",
 "password": "password1"
 }
 ###
 
 PUT http://localhost:3000/user/validation
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2N2U5OGUwNjQwMTQzYzBkZGI2ZGYyZjkiLCJyb2xlIjoidXNlciIsImlhdCI6MTc0MzM1OTQ5NCwiZXhwIjoxNzQzMzY2Njk0fQ.2hHS_dyraE7pltl94_DRazqpwRlAxrrp1zovrS1w_LE
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2ODEwYWI0OWQ0NjkyMmIyMmZiNjRlZDUiLCJyb2xlIjoidXNlciIsImlhdCI6MTc0NTkyMjg4OSwiZXhwIjoxNzQ1OTMwMDg5fQ.4oXn1Ce8KXfDtaefnj0l7F8Aw30t_AKXd6sNnrOvDxE
 
 {
-  "codigo": 621992
+  "codigo": 577460
 }
 
 ###
@@ -22,7 +22,7 @@ POST http://localhost:3000/user/login
 Content-Type: application/json
 
 {
-  "email": "test106@test.com",
+  "email": "test21@test.com",
   "password": "password1"
 }
 
@@ -31,19 +31,19 @@ Content-Type: application/json
 ### Actualizar datos personales del usuario
 PUT http://localhost:3000/user/register
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2N2U5OGUwNjQwMTQzYzBkZGI2ZGYyZjkiLCJyb2xlIjoidXNlciIsImlhdCI6MTc0MzM1OTU1MCwiZXhwIjoxNzQzMzY2NzUwfQ.nz1A9kBV-Ts9cbqGktpSEn5Rokq8fa1wwn7VuESfA3A
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2ODEwYjlhMzAyZGQ3OWE1MGU5OGUwMGMiLCJyb2xlIjoidXNlciIsImlhdCI6MTc0NTkyNjU2MywiZXhwIjoxNzQ1OTMzNzYzfQ.QrowN0FGmuYmuWB703jVjeO5ZAxpc4W2Y18sdae2o1M
 
 {
   "name": "José",
   "surnames": "García Pérez",
-  "nif": "40000001W"
+  "nif": "40000001A"
 }
 
 ###
 
 PATCH http://localhost:3000/user/company
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2N2U5OGUwNjQwMTQzYzBkZGI2ZGYyZjkiLCJyb2xlIjoidXNlciIsImlhdCI6MTc0MzM1OTU1MCwiZXhwIjoxNzQzMzY2NzUwfQ.nz1A9kBV-Ts9cbqGktpSEn5Rokq8fa1wwn7VuESfA3A
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2ODEwYjlhMzAyZGQ3OWE1MGU5OGUwMGMiLCJyb2xlIjoidXNlciIsImlhdCI6MTc0NTkyNjU2MywiZXhwIjoxNzQ1OTMzNzYzfQ.QrowN0FGmuYmuWB703jVjeO5ZAxpc4W2Y18sdae2o1M
 
 {
   "company": {
@@ -84,7 +84,7 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2N2U5OGUwN
 
 ###
 POST http://localhost:3000/client
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2ODA3NmUyMzI1MGNjODhkY2IwYjdhNjAiLCJyb2xlIjoidXNlciIsImlhdCI6MTc0NTQ4NjcyOCwiZXhwIjoxNzQ1NDkzOTI4fQ.d1M8OCsOda15LxoJtOMDysb8kiElTHohmKLSIOJgqao
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2ODEwYjlhMzAyZGQ3OWE1MGU5OGUwMGMiLCJyb2xlIjoidXNlciIsImlhdCI6MTc0NTkyNjU2MywiZXhwIjoxNzQ1OTMzNzYzfQ.QrowN0FGmuYmuWB703jVjeO5ZAxpc4W2Y18sdae2o1M
 Content-Type: application/json
 
 {
@@ -92,8 +92,8 @@ Content-Type: application/json
   "cif": "B12345658"
 }
 ###
-PATCH http://localhost:3000/client/680a03d36ce4cee6b5de7371
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2ODA3NmUyMzI1MGNjODhkY2IwYjdhNjAiLCJyb2xlIjoidXNlciIsImlhdCI6MTc0NTQ4NjcyOCwiZXhwIjoxNzQ1NDkzOTI4fQ.d1M8OCsOda15LxoJtOMDysb8kiElTHohmKLSIOJgqao
+PATCH http://localhost:3000/client/6810b9d702dd79a50e98e015
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2ODEwYjlhMzAyZGQ3OWE1MGU5OGUwMGMiLCJyb2xlIjoidXNlciIsImlhdCI6MTc0NTkyNjU2MywiZXhwIjoxNzQ1OTMzNzYzfQ.QrowN0FGmuYmuWB703jVjeO5ZAxpc4W2Y18sdae2o1M
 Content-Type: application/json
 
 {

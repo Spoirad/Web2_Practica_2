@@ -141,10 +141,10 @@ const updateCompany = async (req, res) => {
 
         // Validar si ya tiene una empresa asignada con ese CIF
         const existingCompany = await User.findOne({ "company.cif": company.cif });
-        if (existingCompany) {
-            return handleHttpError(res, "El CIF de la empresa ya existe", 409);
+        /*if (existingCompany) {
+            return handlSeHttpError(res, "El CIF de la empresa ya existe", 409);
         }
-
+        */
         // Si el usuario es autónomo, la empresa será su información personal
         if (user.role === "autonomo") {
             company.name = user.name;

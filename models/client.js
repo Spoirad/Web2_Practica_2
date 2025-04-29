@@ -7,8 +7,7 @@ const clientSchema = new mongoose.Schema({
     },
     cif: {
         type: String,
-        required: true,
-        unique: true
+        required: true
     },
     archived: {
         type: Boolean,
