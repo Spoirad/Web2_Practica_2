@@ -16,17 +16,23 @@ Aplicación backend RESTful para la gestión de usuarios, clientes, proyectos y 
 ## 📁 Estructura del proyecto
 
 ```
+├── config/
 ├── controllers/
+├── docs/           # Swagger YAMLs
 ├── middleware/
 ├── models/
 ├── routes/
+├── tests/
 ├── utils/
 ├── validators/
-├── tests/
-├── docs/           # Swagger YAMLs
 ├── .env
+├── .gitignore
 ├── app.js
-└── README.md
+├── index.http     # Testing
+├── package-lock.json
+├── package.json
+├── swagger.js
+
 ```
 
 ## 🔐 Autenticación
