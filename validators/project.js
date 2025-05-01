@@ -20,4 +20,9 @@ const validatorUpdateProject = [
     validateResult
 ];
 
-module.exports = { validatorCreateProject, validatorUpdateProject };
+const validatorGetItem  = [
+    check("id").exists().notEmpty().isMongoId(),
+    validateResult
+];
+
+module.exports = { validatorCreateProject, validatorUpdateProject, validatorGetItem };

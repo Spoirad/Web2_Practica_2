@@ -22,4 +22,9 @@ const validatorCreateDeliveryNote = [
     validateResults
 ];
 
-module.exports = { validatorCreateDeliveryNote };
+const validatorGetItem  = [
+    check("id").exists().notEmpty().isMongoId(),
+    validateResults
+];
+
+module.exports = { validatorCreateDeliveryNote, validatorGetItem };

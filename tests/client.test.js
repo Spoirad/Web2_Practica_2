@@ -8,6 +8,8 @@ const { tokenSign } = require("../utils/handleJwt.js");
 const api = supertest(app);
 
 let token;
+let tokenAjeno;
+let user;
 let clientId = "";
 
 beforeAll(async () => {
@@ -17,7 +19,7 @@ beforeAll(async () => {
   await mongoose.connection.db.dropDatabase();
 
   const password = await encrypt("mipassword");
-  const user = await usersModel.create({
+  user = await usersModel.create({
     email: "cliente@example.com",
     password,
     nif: "11111111A",
@@ -37,7 +39,28 @@ beforeAll(async () => {
   });
 
   token = await tokenSign(user);
+
+  const otroUser = await usersModel.create({
+    email: "otro@test.com",
+    password: await encrypt("password1"),
+    status: true,
+    nif: "40000012Z",
+    name: "Ajeno",
+    surnames: "Test",
+    company: {
+      name: "Otra S.L.",
+      cif: "B00000005",
+      street: "Calle Ajena",
+      number: 5,
+      postal: 28005,
+      city: "Madrid",
+      province: "Madrid"
+    }
+  });
+
+  tokenAjeno = await tokenSign(otroUser);
 });
+
 
 afterAll(async () => {
   await mongoose.connection.close();
@@ -130,4 +153,130 @@ describe("Client API tests", () => {
     const deleted = await clientModel.findById(clientId);
     expect(deleted).toBeNull();
   });
+
+});
+
+describe("Client API Error Handling", () => {
+  test("Create client with missing fields", async () => {
+    const res = await api
+      .post("/client")
+      .set("Authorization", `Bearer ${token}`)
+      .send({})
+      .expect(400);
+
+    expect(res.body).toHaveProperty("error", true);
+  });
+
+  test("Get client with invalid ID", async () => {
+    const res = await api
+      .get("/client/invalidid123")
+      .set("Authorization", `Bearer ${token}`)
+      .expect(400);
+
+    expect(res.body).toHaveProperty("error", true);
+  });
+  test("Get client that does not exist", async () => {
+    const nonExistentId = new mongoose.Types.ObjectId();
+    const res = await api
+      .get(`/client/${nonExistentId}`)
+      .set("Authorization", `Bearer ${token}`)
+      .expect(404);
+
+    expect(res.body).toHaveProperty("error", true);
+  });
+
+  test("Update client with invalid ID", async () => {
+    const res = await api
+      .patch("/client/invalidid123")
+      .set("Authorization", `Bearer ${token}`)
+      .send({ name: "Actualizado" })
+      .expect(400);
+
+    expect(res.body).toHaveProperty("error", true);
+  });
+
+  test("Delete client with invalid ID", async () => {
+    const res = await api
+      .delete("/client/invalidid123")
+      .set("Authorization", `Bearer ${token}`)
+      .expect(400);
+
+    expect(res.body).toHaveProperty("error", true);
+  });
+
+  test("Delete client that does not exist", async () => {
+    const nonExistentId = new mongoose.Types.ObjectId();
+    const res = await api
+      .delete(`/client/${nonExistentId}`)
+      .set("Authorization", `Bearer ${token}`)
+      .expect(404);
+
+    expect(res.body).toHaveProperty("error", true);
+  });
+
+  test("Restore client that is not archived", async () => {
+    const res = await api
+      .patch(`/client/${clientId}/restore`)
+      .set("Authorization", `Bearer ${token}`)
+      .expect(404);
+
+    expect(res.body).toHaveProperty("error", true);
+    expect(res.body.message).toMatch(/no archivado/i);
+  });
+
+  test("Access client from another user", async () => {
+    // Crear un cliente con el usuario propietario
+    const cliente = await clientModel.create({
+      name: "Cliente privado",
+      cif: "CLPRIVADO01",
+      owner: user._id,
+      companyCIF: user.company.cif,
+      archived: false
+    });
+
+    // Intentar acceder con otro usuario (no tiene acceso)
+    const res = await api
+      .get(`/client/${cliente._id}`)
+      .set("Authorization", `Bearer ${tokenAjeno}`)
+      .expect(403);
+
+    expect(res.body).toHaveProperty("error", true);
+    expect(res.body.message).toMatch(/no tienes acceso/i);
+  });
+
+
+  test("Create client without token", async () => {
+    const res = await api
+      .post("/client")
+      .send({ name: "Cliente sin token", cif: "SIN1234" })
+      .expect(401);
+
+    expect(res.body).toHaveProperty("error", true);
+  });
+
+  test("Cannot restore a client that was already restored", async () => {
+    const client = await clientModel.create({
+      name: "Cliente Restaurado",
+      cif: "CLIRES123",
+      owner: user._id,
+      companyCIF: "B00000001",
+      archived: true
+    });
+
+    // Primera restauración (válida)
+    await api
+      .patch(`/client/${client._id}/restore`)
+      .set("Authorization", `Bearer ${token}`)
+      .expect(200);
+
+    // Segunda restauración (debe fallar)
+    const res = await api
+      .patch(`/client/${client._id}/restore`)
+      .set("Authorization", `Bearer ${token}`)
+      .expect(404);
+
+    expect(res.body).toHaveProperty("error", true);
+    expect(res.body.message).toMatch(/no archivado/i);
+  });
+
 });

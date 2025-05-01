@@ -11,4 +11,10 @@ const validatorUpdateClient = [
     check("cif").optional().isString(),
     validateResults
 ];
-module.exports = { validatorCreateClient, validatorUpdateClient };
+
+const validatorGetItem  = [
+    check("id").exists().notEmpty().isMongoId(),
+    validateResults
+];
+
+module.exports = { validatorCreateClient, validatorUpdateClient, validatorGetItem };

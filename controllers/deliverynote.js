@@ -60,14 +60,14 @@ const getDeliveryNoteById = async (req, res) => {
             .populate("user");
 
         if (!deliveryNote || deliveryNote.archived) {
-            return res.status(404).json({ error: "Albarán no encontrado o archivado" });
+            return handleHttpError(res, "Albarán no encontrado o archivado", 404);
         }
 
         if (
             !deliveryNote.user.equals(userId) &&
             deliveryNote.companyCIF !== companyCIF
         ) {
-            return res.status(403).json({ error: "No autorizado para ver este albarán" });
+            return handleHttpError(res, "No autorizado para ver este albarán", 403);
         }
 
         res.json(deliveryNote);
@@ -86,18 +86,18 @@ const uploadSignature = async (req, res) => {
         const deliveryNote = await deliverynoteModel.findById(id);
 
         if (!deliveryNote || deliveryNote.archived) {
-            return res.status(404).json({ error: "Albarán no encontrado o archivado" });
+            return handleHttpError(res, "Albarán no encontrado o archivado", 404);
         }
 
         if (
             !deliveryNote.user.equals(userId) &&
             deliveryNote.companyCIF !== companyCIF
         ) {
-            return res.status(403).json({ error: "No autorizado para firmar este albarán" });
+            return handleHttpError(res, "No autorizado para firmar este albarán", 403);
         }
 
         if (deliveryNote.signed) {
-            return res.status(400).json({ error: "El albarán ya está firmado" });
+            return handleHttpError(res, "El albarán ya está firmado", 400);
         }
 
         const fileBuffer = req.file.buffer;
@@ -128,14 +128,14 @@ const generateDeliveryNotePDF = async (req, res) => {
             .populate("user");
 
         if (!deliveryNote || deliveryNote.archived) {
-            return res.status(404).json({ error: "Albarán no encontrado o archivado" });
+            return handleHttpError(res, "Albarán no encontrado o archivado", 404);
         }
 
         if (
             !deliveryNote.user.equals(userId) &&
             deliveryNote.companyCIF !== companyCIF
         ) {
-            return res.status(403).json({ error: "No autorizado para ver este albarán" });
+            return handleHttpError(res, "No autorizado para ver este albarán", 403);
         }
 
         // ✅ Crear PDF
@@ -216,18 +216,18 @@ const deleteDeliveryNote = async (req, res) => {
         const deliveryNote = await deliverynoteModel.findById(id);
 
         if (!deliveryNote) {
-            return res.status(404).json({ error: "Albarán no encontrado" });
+            return handleHttpError(res, "Albarán no encontrado", 404);
         }
 
         if (
             !deliveryNote.user.equals(userId) &&
             deliveryNote.companyCIF !== companyCIF
         ) {
-            return res.status(403).json({ error: "No autorizado para eliminar este albarán" });
+            return handleHttpError(res, "No autorizado para eliminar este albarán", 403);
         }
 
         if (deliveryNote.signed) {
-            return res.status(400).json({ error: "No se puede borrar un albarán firmado" });
+            return handleHttpError(res, "No se puede borrar un albarán firmado", 400);
         }
 
         await deliverynoteModel.findByIdAndDelete(id);

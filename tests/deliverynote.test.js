@@ -14,13 +14,15 @@ let token;
 let deliveryId;
 let clientId;
 let projectId;
+let userId;
+let tokenAjeno;
 
 beforeAll(async () => {
     await new Promise((resolve) => mongoose.connection.once("open", resolve));
     await mongoose.connection.db.dropDatabase();
 
     const password = await encrypt("password1");
-    const user = await usersModel.create({
+    user = await usersModel.create({
         email: "delivery@test.com",
         password,
         status: true,
@@ -39,6 +41,7 @@ beforeAll(async () => {
     });
 
     token = await tokenSign(user);
+    userId = user._id;
 
     const client = await clientModel.create({
         name: "Cliente Test",
@@ -57,6 +60,26 @@ beforeAll(async () => {
         owner: user._id
     });
     projectId = project._id;
+
+    const otroUser = await usersModel.create({
+        email: "otro@test.com",
+        password: await encrypt("password1"),
+        status: true,
+        nif: "40000012Z",
+        name: "Ajeno",
+        surnames: "Test",
+        company: {
+            name: "Otra S.L.",
+            cif: "B00000005",
+            street: "Calle Ajena",
+            number: 5,
+            postal: 28005,
+            city: "Madrid",
+            province: "Madrid"
+        }
+    });
+
+    tokenAjeno = await tokenSign(otroUser);
 });
 
 afterAll(async () => {
@@ -165,4 +188,95 @@ describe("DeliveryNote API tests", () => {
         const deleted = await deliveryModel.findById(tempId);
         expect(deleted).toBeNull();
     });
+});
+
+describe("DeliveryNote API Error Handling", () => {
+    test("Should not create deliverynote with missing fields", async () => {
+        const res = await api
+            .post("/deliverynote")
+            .set("Authorization", `Bearer ${token}`)
+            .send({}) // Campos vacíos
+            .expect(400);
+
+        expect(res.body).toHaveProperty("error", true);
+    });
+
+    test("Should return 400 for invalid ID on GET", async () => {
+        const res = await api
+            .get("/deliverynote/invalid-id-123")
+            .set("Authorization", `Bearer ${token}`)
+            .expect(400);
+
+        expect(res.body).toHaveProperty("error", true);
+    });
+
+    test("Should return 404 for non-existent deliverynote", async () => {
+        const fakeId = new mongoose.Types.ObjectId();
+        const res = await api
+            .get(`/deliverynote/${fakeId}`)
+            .set("Authorization", `Bearer ${token}`)
+            .expect(404);
+
+        expect(res.body).toHaveProperty("error", true);
+    });
+
+    test("Should not upload signature with invalid ID", async () => {
+        const res = await api
+            .patch("/deliverynote/invalid-id-456/signature")
+            .set("Authorization", `Bearer ${token}`)
+            .attach("signatureUrl", path.join(__dirname, "firma-fake.png"))
+            .expect(400);
+
+        expect(res.body).toHaveProperty("error", true);
+    });
+
+    test("Should not allow signing a deliverynote twice", async () => {
+        const note = await deliveryModel.create({
+            user: userId,
+            client: clientId,
+            project: projectId,
+            description: "Firmado 2 veces",
+            signed: true,
+            signatureUrl: "https://ejemplo.com/firma.png"
+        });
+
+        const res = await api
+            .patch(`/deliverynote/${note._id}/signature`)
+            .set("Authorization", `Bearer ${token}`)
+            .attach("signature", path.join(__dirname, "firma-fake.png"))
+            .expect(400);
+
+        expect(res.body).toHaveProperty("error", true);
+        expect(res.body.message).toMatch(/ya está firmado/i);
+    });
+
+    test("Should not allow PDF generation for unauthorized user", async () => {
+        const notaPrivada = await deliveryModel.create({
+            user: userId,
+            client: clientId,
+            project: projectId,
+            description: "Acceso denegado",
+            signed: false
+        });
+
+        const res = await api
+            .get(`/deliverynote/pdf/${notaPrivada._id}`)
+            .set("Authorization", `Bearer ${tokenAjeno}`)
+            .expect(403);
+
+        expect(res.body).toHaveProperty("error", true);
+        expect(res.body.message).toMatch(/no autorizado/i);
+    });
+
+    test("Should return 404 when deleting non-existent deliverynote", async () => {
+        const fakeId = new mongoose.Types.ObjectId();
+
+        const res = await api
+            .delete(`/deliverynote/${fakeId}`)
+            .set("Authorization", `Bearer ${token}`)
+            .expect(404);
+
+        expect(res.body).toHaveProperty("error", true);
+    });
+
 });

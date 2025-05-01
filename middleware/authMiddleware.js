@@ -27,7 +27,7 @@ const authMiddleware = async (req, res, next) => {
         next();
     } catch (error) {
         console.log(error);
-        return handleHttpError(res, "Error en la autenticación", 403);
+        return handleHttpError(res, "Token inválido o expirado", 401);
     }
 };
 

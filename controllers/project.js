@@ -15,7 +15,7 @@ const createProject = async (req, res) => {
         });
 
         if (!clientFound) {
-            return res.status(404).json({ error: "Cliente no válido o no encontrado" });
+            return handleHttpError(res, "Cliente no válido o no encontrado", 404);
         }
 
         // Verificar que NO exista ya un proyecto con ese nombre para este usuario o su empresa
@@ -25,7 +25,7 @@ const createProject = async (req, res) => {
         });
 
         if (existingProject) {
-            return res.status(409).json({ error: "Ya existe un proyecto con ese nombre para este usuario o compañía" });
+            return handleHttpError(res, "Ya existe un proyecto con ese nombre para este usuario o compañía", 409);
         }
 
         // Crear el proyecto
@@ -76,14 +76,14 @@ const getProjectById = async (req, res) => {
         const project = await projectModel.findById(id).populate("client");
 
         if (!project || project.archived) {
-            return res.status(404).json({ error: "Proyecto no encontrado o archivado" });
+            return handleHttpError(res, "Proyecto no encontrado o archivado", 404);
         }
 
         if (
             !project.owner.equals(userId) &&
             project.companyCIF !== companyCIF
         ) {
-            return res.status(403).json({ error: "No tienes acceso a este proyecto" });
+            return handleHttpError(res, "No tienes acceso a este proyecto", 403);
         }
 
         res.json(project);
@@ -102,14 +102,14 @@ const updateProject = async (req, res) => {
         const project = await projectModel.findById(id);
 
         if (!project || project.archived) {
-            return res.status(404).json({ error: "Proyecto no encontrado o archivado" });
+            return handleHttpError(res, "Proyecto no encontrado o archivado", 404);
         }
 
         if (
             !project.owner.equals(userId) &&
             project.companyCIF !== companyCIF
         ) {
-            return res.status(403).json({ error: "No autorizado para actualizar este proyecto" });
+            return handleHttpError(res, "No autorizado para actualizar este proyecto", 403);
         }
 
         const fieldsToUpdate = ["name", "description", "address", "postalCode", "city"];
@@ -138,14 +138,14 @@ const deleteProject = async (req, res) => {
         const project = await projectModel.findById(id);
 
         if (!project) {
-            return res.status(404).json({ error: "Proyecto no encontrado" });
+            return handleHttpError(res, "Proyecto no encontrado", 404);
         }
 
         if (
             !project.owner.equals(userId) &&
             project.companyCIF !== companyCIF
         ) {
-            return res.status(403).json({ error: "No autorizado para eliminar este proyecto" });
+            return handleHttpError(res, "No autorizado para eliminar este proyecto", 403);
         }
 
         if (isSoft) {
@@ -191,14 +191,14 @@ const restoreProject = async (req, res) => {
         const project = await projectModel.findById(id);
 
         if (!project || !project.archived) {
-            return res.status(404).json({ error: "Proyecto no archivado o no encontrado" });
+            return handleHttpError(res, "Proyecto no archivado o no encontrado", 404);
         }
 
         if (
             !project.owner.equals(userId) &&
             project.companyCIF !== companyCIF
         ) {
-            return res.status(403).json({ error: "No autorizado para restaurar este proyecto" });
+            return handleHttpError(res, "No autorizado para restaurar este proyecto", 403);
         }
 
         project.archived = false;

@@ -5,6 +5,8 @@ const usersModel = require("../models/user.js");
 const { encrypt } = require("../utils/handlePassword.js");
 const { tokenSign } = require("../utils/handleJwt.js");
 const api = supertest(app);
+const path = require("path");
+
 
 let token;
 let userId;
@@ -125,5 +127,132 @@ describe("User API tests", () => {
 
     const deleted = await usersModel.findById(newUser._id);
     expect(deleted).toBeNull();
+  });
+
+  test("Upload logo for user", async () => {
+    const res = await api
+      .patch("/user/logo")
+      .set("Authorization", `Bearer ${token}`)
+      .attach("logo", path.join(__dirname, "firma-fake.png"))
+      .expect(200);
+
+    expect(res.body).toHaveProperty("message", "Logo actualizado correctamente");
+    expect(res.body).toHaveProperty("logo");
+    expect(res.body.logo).toContain("ipfs.io/ipfs/");    
+  });
+});
+
+describe("User API Error Handling", () => {
+  test("Register with missing email", async () => {
+    const res = await api
+      .post("/user/register")
+      .send({ password: "pass123" })
+      .expect(400);
+
+    expect(res.body).toHaveProperty("error", true);
+  });
+
+  test("Login with wrong credentials", async () => {
+    const res = await api
+      .post("/user/login")
+      .send({ email: "nonexistent@test.com", password: "wrongpass" })
+      .expect(404);
+
+    expect(res.body).toHaveProperty("error", true);
+  });
+
+  test("Access profile without token", async () => {
+    const res = await api
+      .get("/user")
+      .expect(401);
+
+    expect(res.body).toHaveProperty("error", true);
+  });
+
+  test("Company update without required fields", async () => {
+    const res = await api
+      .patch("/user/company")
+      .set("Authorization", `Bearer ${token}`)
+      .send({})
+      .expect(400);
+
+    expect(res.body).toHaveProperty("error", true);
+  });
+
+  test("Delete user without token", async () => {
+    const res = await api
+      .delete("/user")
+      .expect(401);
+
+    expect(res.body).toHaveProperty("error", true);
+  });
+
+  test("Access with invalid token", async () => {
+    const res = await api
+      .get("/user")
+      .set("Authorization", "Bearer invalidtoken123")
+      .expect(401);
+
+    expect(res.body).toHaveProperty("error", true);
+  });
+
+  test("Validate already verified email", async () => {
+    // Asume que el user ya tiene status: true
+    const res = await api
+      .put("/user/validation")
+      .set("Authorization", `Bearer ${token}`)
+      .send({ codigo: 123456 }) // valor no relevante porque ya está verificado
+      .expect(400);
+
+    expect(res.body.message).toMatch(/ya ha sido validado/i);
+  });
+
+  test("Register with existing email", async () => {
+    // Insertamos el email por si no está en la base de datos
+    await usersModel.create({
+      email: "paco@test.com",
+      password: await encrypt("password123"),
+      status: true,
+      nif: "40000020A",
+      name: "Duplicado",
+      surnames: "Correo"
+    });
+
+    const res = await api
+      .post("/user/register")
+      .set("api_key", "prueba_api_random")
+      .send({ email: "paco@test.com", password: "password123" })
+      .expect(409);
+
+    expect(res.body).toHaveProperty("error", true);
+  });
+
+  test("Register with short password", async () => {
+    const res = await api
+      .post("/user/register")
+      .set("api_key", "prueba_api_random")
+      .send({ email: "shortpass@test.com", password: "123" }) // muy corta
+      .expect(400);
+
+    expect(res.body).toHaveProperty("error", true);
+    expect(Array.isArray(res.body.message)).toBe(true);
+  });
+
+  test("Upload logo Should fail without token", async () => {
+    await api
+      .patch("/user/logo")
+      .attach("logo", path.join(__dirname, "firma-fake.png"))
+      .expect(401);
+  });
+
+  test("Upload logo should fail if logo is missing", async () => {
+    const res = await api
+      .patch("/user/logo")
+      .set("Authorization", `Bearer ${token}`)
+      .expect(400);
+
+    expect(res.body).toHaveProperty("error", true);
+    expect(res.body.message).toMatch(/no se subió ninguna imagen/i);
+
   });
 });

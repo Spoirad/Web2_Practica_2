@@ -31,15 +31,15 @@ const registerUser = async (req, res) => {
         const token = tokenSign(data);
 
         //devolver el OK + datos y token
-        res.status(201).json({             
+        res.status(201).json({
             email: data.email,
             status: data.status, // Representa si el email ha sido verificado
             role: data.role,
             token
-         });
+        });
     } catch (err) {
         console.error(err);
-        handleHttpError(res, "ERROR_REGISTER_USER");
+        handleHttpError(res, "ERROR_REGISTER_USER", 500)
     }
 };
 
@@ -72,7 +72,7 @@ const validateEmail = async (req, res) => {
         return res.json({ message: "Email validado correctamente" });
     } catch (error) {
         console.log(error);
-        handleHttpError(res, "Error validando el email");
+        handleHttpError(res, "Error validando el email", 500);
     }
 };
 
@@ -167,7 +167,7 @@ const uploadImage = async (req, res) => {
         const user = req.user; // Usuario autenticado del token
 
         if (!req.file) {
-            return res.status(400).json({ error: "No se subió ninguna imagen" });
+            return handleHttpError(res, "No se subió ninguna imagen", 400);
         }
 
         const fileBuffer = req.file.buffer;
@@ -175,21 +175,19 @@ const uploadImage = async (req, res) => {
 
         // Subir imagen a Pinata
         const pinataResponse = await uploadToPinata(fileBuffer, fileName);
-        if (!pinataResponse || !pinataResponse.IpfsHash) {
-            return res.status(500).json({ error: "Error al subir el logo a IPFS" });
+        //console.log(pinataResponse, !pinataResponse, !pinataResponse.IpfsHash )
+        if (!pinataResponse) {
+            return handleHttpError(res, "Error al subir el logo a IPFS", 500);
         }
 
-        // Construir URL de IPFS
-        const ipfsUrl = `https://ipfs.io/ipfs/${pinataResponse.IpfsHash}`;
-
         // Guardar la URL en la company del usuario.
-        user.company.logo = ipfsUrl;
+        user.company.logo = pinataResponse;
         await user.save();
 
-        res.json({ message: "Logo actualizado correctamente", logo: ipfsUrl });
+        res.json({ message: "Logo actualizado correctamente", logo: pinataResponse });
     } catch (err) {
         console.error(err);
-        res.status(500).json({ error: "ERROR_UPLOAD_COMPANY_IMAGE" });
+        return handleHttpError(res, "ERROR_UPLOAD_COMPANY_IMAGE", 500);
     }
 };
 
@@ -197,7 +195,7 @@ const getUser = async (req, res) => {
     try {
         res.json(req.user);
     } catch (error) {
-        res.status(500).json({ error: "Internal Server Error" });
+        handleHttpError(res, "ERROR_GET_USER", 500);
     }
 };
 
@@ -218,7 +216,7 @@ const deleteUser = async (req, res) => {
 
     } catch (error) {
         console.error(error);
-        res.status(500).json({ error: "Internal Server Error" });
+        return handleHttpError(res, "ERROR_DELETE_USER", 500);
     }
 };
 
