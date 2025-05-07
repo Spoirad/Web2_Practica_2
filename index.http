@@ -4,17 +4,17 @@ Content-Type: application/json
 api_key: prueba_api_random
 
 {
-"email": "test211@test.com",
-"password": "passwor1"
+"email": "test2@test.com",
+"password": "password2"
 }
 ###
 
 PUT http://localhost:3000/user/validation
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2ODEwYjlhMzAyZGQ3OWE1MGU5OGUwMGMiLCJyb2xlIjoidXNlciIsImlhdCI6MTc0NjExMjc1OCwiZXhwIjoxNzQ2MTE5OTU4fQ.HLNXHPLi_o-7N-7ZAUAYzisAhG0B49pRlhIVeK6G3C0
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2ODFiMzE3MGM1NzllNDUzZGUwNTQxNGMiLCJyb2xlIjoidXNlciIsImlhdCI6MTc0NjYxMjU5MiwiZXhwIjoxNzQ2NjE5NzkyfQ.CdwjJN0up96dwkkjH4D4MZc_1v2EvTb2DmN3bcw9Atg
 
 {
-  "codigo": 940982
+  "codigo": 100682
 }
 
 ###
@@ -22,7 +22,7 @@ POST http://localhost:3000/user/login
 Content-Type: application/json
 
 {
-  "email": "test21@test.com",
+  "email": "test1@test.com",
   "password": "password1"
 }
 
@@ -31,7 +31,7 @@ Content-Type: application/json
 ### Actualizar datos personales del usuario
 PUT http://localhost:3000/user/register
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2ODEwYjlhMzAyZGQ3OWE1MGU5OGUwMGMiLCJyb2xlIjoidXNlciIsImlhdCI6MTc0NTkyNjU2MywiZXhwIjoxNzQ1OTMzNzYzfQ.QrowN0FGmuYmuWB703jVjeO5ZAxpc4W2Y18sdae2o1M
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2ODFiMzE3MGM1NzllNDUzZGUwNTQxNGMiLCJyb2xlIjoidXNlciIsImlhdCI6MTc0NjYxMjYyMywiZXhwIjoxNzQ2NjE5ODIzfQ.kjNdHH1zxH5SXfqe29NJ3I0G8K_hP9vt_Gz_vTjoMdY
 
 {
   "name": "José",
@@ -43,7 +43,7 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2ODEwYjlhM
 
 PATCH http://localhost:3000/user/company
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2ODEwYjlhMzAyZGQ3OWE1MGU5OGUwMGMiLCJyb2xlIjoidXNlciIsImlhdCI6MTc0NjEyODE3MCwiZXhwIjoxNzQ2MTM1MzcwfQ.7CBnt15qeL6HrSEn0iDT2HeSWXCOy9aogdaGx5UCocY
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2ODFiMzE3MGM1NzllNDUzZGUwNTQxNGMiLCJyb2xlIjoidXNlciIsImlhdCI6MTc0NjYxMjYyMywiZXhwIjoxNzQ2NjE5ODIzfQ.kjNdHH1zxH5SXfqe29NJ3I0G8K_hP9vt_Gz_vTjoMdY
 
 {
   "company": {
@@ -59,7 +59,7 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2ODEwYjlhM
 
 ###
 PATCH http://localhost:3000/user/logo
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2ODEwYjlhMzAyZGQ3OWE1MGU5OGUwMGMiLCJyb2xlIjoidXNlciIsImlhdCI6MTc0NjEyODE3MCwiZXhwIjoxNzQ2MTM1MzcwfQ.7CBnt15qeL6HrSEn0iDT2HeSWXCOy9aogdaGx5UCocY
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2ODFiMzE3MGM1NzllNDUzZGUwNTQxNGMiLCJyb2xlIjoidXNlciIsImlhdCI6MTc0NjYxMjYyMywiZXhwIjoxNzQ2NjE5ODIzfQ.kjNdHH1zxH5SXfqe29NJ3I0G8K_hP9vt_Gz_vTjoMdY
 Content-Type: multipart/form-data; boundary=----ejemplo
 
 ------ejemplo
@@ -71,7 +71,7 @@ Content-Type: image/png
 ###
 
 GET http://localhost:3000/user
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2N2U5OGUwNjQwMTQzYzBkZGI2ZGYyZjkiLCJyb2xlIjoidXNlciIsImlhdCI6MTc0MzM1OTU1MCwiZXhwIjoxNzQzMzY2NzUwfQ.nz1A9kBV-Ts9cbqGktpSEn5Rokq8fa1wwn7VuESfA3A
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2ODFiMzE3MGM1NzllNDUzZGUwNTQxNGMiLCJyb2xlIjoidXNlciIsImlhdCI6MTc0NjYxMjYyMywiZXhwIjoxNzQ2NjE5ODIzfQ.kjNdHH1zxH5SXfqe29NJ3I0G8K_hP9vt_Gz_vTjoMdY
 ###
 DELETE http://localhost:3000/user?soft=true
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2N2U5OGUwNjQwMTQzYzBkZGI2ZGYyZjkiLCJyb2xlIjoidXNlciIsImlhdCI6MTc0MzM1OTU1MCwiZXhwIjoxNzQzMzY2NzUwfQ.nz1A9kBV-Ts9cbqGktpSEn5Rokq8fa1wwn7VuESfA3A
@@ -84,16 +84,16 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2N2U5OGUwN
 
 ###
 POST http://localhost:3000/client
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2ODEwYjlhMzAyZGQ3OWE1MGU5OGUwMGMiLCJyb2xlIjoidXNlciIsImlhdCI6MTc0NjExMjE1MSwiZXhwIjoxNzQ2MTE5MzUxfQ.PsRieHIN6EAGIPw3xMCQJEl8OQBPvBDo9ZrBWyhlAAI
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2ODFiMzE3MGM1NzllNDUzZGUwNTQxNGMiLCJyb2xlIjoidXNlciIsImlhdCI6MTc0NjYxMjYyMywiZXhwIjoxNzQ2NjE5ODIzfQ.kjNdHH1zxH5SXfqe29NJ3I0G8K_hP9vt_Gz_vTjoMdY
 Content-Type: application/json
 
 {
   "name": "Cliente Ejemplo 2",
-  "cif": "B12345658"
+  "cif": "B12345657"
 }
 ###
-PATCH http://localhost:3000/client/6810b9d702dd79a50e98e01
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2ODEwYjlhMzAyZGQ3OWE1MGU5OGUwMGMiLCJyb2xlIjoidXNlciIsImlhdCI6MTc0NjExMjE1MSwiZXhwIjoxNzQ2MTE5MzUxfQ.PsRieHIN6EAGIPw3xMCQJEl8OQBPvBDo9ZrBWyhlAAI
+PATCH http://localhost:3000/client/681b3207c579e453de05415d
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2ODFiMzE3MGM1NzllNDUzZGUwNTQxNGMiLCJyb2xlIjoidXNlciIsImlhdCI6MTc0NjYxMjYyMywiZXhwIjoxNzQ2NjE5ODIzfQ.kjNdHH1zxH5SXfqe29NJ3I0G8K_hP9vt_Gz_vTjoMdY
 Content-Type: application/json
 
 {
@@ -101,22 +101,22 @@ Content-Type: application/json
 }
 ###
 GET http://localhost:3000/client
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2ODEwYjlhMzAyZGQ3OWE1MGU5OGUwMGMiLCJyb2xlIjoidXNlciIsImlhdCI6MTc0NjExMjE1MSwiZXhwIjoxNzQ2MTE5MzUxfQ.PsRieHIN6EAGIPw3xMCQJEl8OQBPvBDo9ZrBWyhlAAI
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2ODFiMzE3MGM1NzllNDUzZGUwNTQxNGMiLCJyb2xlIjoidXNlciIsImlhdCI6MTc0NjYxMjYyMywiZXhwIjoxNzQ2NjE5ODIzfQ.kjNdHH1zxH5SXfqe29NJ3I0G8K_hP9vt_Gz_vTjoMdY
 ###
-GET http://localhost:3000/client/680a09472adc0bd9e9c8d74
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2ODEwYjlhMzAyZGQ3OWE1MGU5OGUwMGMiLCJyb2xlIjoidXNlciIsImlhdCI6MTc0NjExMjE1MSwiZXhwIjoxNzQ2MTE5MzUxfQ.PsRieHIN6EAGIPw3xMCQJEl8OQBPvBDo9ZrBWyhlAAI
+GET http://localhost:3000/client/681b3207c579e453de05415d
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2ODFiMzE3MGM1NzllNDUzZGUwNTQxNGMiLCJyb2xlIjoidXNlciIsImlhdCI6MTc0NjYxMjYyMywiZXhwIjoxNzQ2NjE5ODIzfQ.kjNdHH1zxH5SXfqe29NJ3I0G8K_hP9vt_Gz_vTjoMdY
 ###
-DELETE http://localhost:3000/client/680a09472adc0bd9e9c8d744?soft=true
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2ODA3NmUyMzI1MGNjODhkY2IwYjdhNjAiLCJyb2xlIjoidXNlciIsImlhdCI6MTc0NTQ4NjcyOCwiZXhwIjoxNzQ1NDkzOTI4fQ.d1M8OCsOda15LxoJtOMDysb8kiElTHohmKLSIOJgqao
+DELETE http://localhost:3000/client/681b3207c579e453de05415d?soft=true
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2ODFiMzE3MGM1NzllNDUzZGUwNTQxNGMiLCJyb2xlIjoidXNlciIsImlhdCI6MTc0NjYxMjYyMywiZXhwIjoxNzQ2NjE5ODIzfQ.kjNdHH1zxH5SXfqe29NJ3I0G8K_hP9vt_Gz_vTjoMdY
 ###
 GET http://localhost:3000/client/archived
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2ODA3NmUyMzI1MGNjODhkY2IwYjdhNjAiLCJyb2xlIjoidXNlciIsImlhdCI6MTc0NTQ4NjcyOCwiZXhwIjoxNzQ1NDkzOTI4fQ.d1M8OCsOda15LxoJtOMDysb8kiElTHohmKLSIOJgqao
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2ODFiMzE3MGM1NzllNDUzZGUwNTQxNGMiLCJyb2xlIjoidXNlciIsImlhdCI6MTc0NjYxMjYyMywiZXhwIjoxNzQ2NjE5ODIzfQ.kjNdHH1zxH5SXfqe29NJ3I0G8K_hP9vt_Gz_vTjoMdY
 ###
-PATCH http://localhost:3000/client/680a09472adc0bd9e9c8d744/restore
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2ODA3NmUyMzI1MGNjODhkY2IwYjdhNjAiLCJyb2xlIjoidXNlciIsImlhdCI6MTc0NTQ4NjcyOCwiZXhwIjoxNzQ1NDkzOTI4fQ.d1M8OCsOda15LxoJtOMDysb8kiElTHohmKLSIOJgqao
+PATCH http://localhost:3000/client/681b3207c579e453de05415d/restore
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2ODFiMzE3MGM1NzllNDUzZGUwNTQxNGMiLCJyb2xlIjoidXNlciIsImlhdCI6MTc0NjYxMjYyMywiZXhwIjoxNzQ2NjE5ODIzfQ.kjNdHH1zxH5SXfqe29NJ3I0G8K_hP9vt_Gz_vTjoMdY
 ###
 POST http://localhost:3000/project
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2ODA3NmUyMzI1MGNjODhkY2IwYjdhNjAiLCJyb2xlIjoidXNlciIsImlhdCI6MTc0NTY3OTIwNCwiZXhwIjoxNzQ1Njg2NDA0fQ.ohvV1BK_w2Ahf_-ZoKp1Ql36uDucWI6KO5ak5ERWJCo
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2ODFiMzE3MGM1NzllNDUzZGUwNTQxNGMiLCJyb2xlIjoidXNlciIsImlhdCI6MTc0NjYxMjYyMywiZXhwIjoxNzQ2NjE5ODIzfQ.kjNdHH1zxH5SXfqe29NJ3I0G8K_hP9vt_Gz_vTjoMdY
 Content-Type: application/json
 
 {
@@ -125,17 +125,17 @@ Content-Type: application/json
   "address": "Calle Mayor 15",
   "postalCode": "28001",
   "city": "Madrid",
-  "client": "680a09472adc0bd9e9c8d744"
+  "client": "681b3207c579e453de05415d"
 }
 ###
 GET http://localhost:3000/project
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2ODA3NmUyMzI1MGNjODhkY2IwYjdhNjAiLCJyb2xlIjoidXNlciIsImlhdCI6MTc0NTY3OTIwNCwiZXhwIjoxNzQ1Njg2NDA0fQ.ohvV1BK_w2Ahf_-ZoKp1Ql36uDucWI6KO5ak5ERWJCo
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2ODFiMzE3MGM1NzllNDUzZGUwNTQxNGMiLCJyb2xlIjoidXNlciIsImlhdCI6MTc0NjYxMjYyMywiZXhwIjoxNzQ2NjE5ODIzfQ.kjNdHH1zxH5SXfqe29NJ3I0G8K_hP9vt_Gz_vTjoMdY
 ###
-GET http://localhost:3000/project/680cf38fcf67aaa3e91c3d0a
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2ODA3NmUyMzI1MGNjODhkY2IwYjdhNjAiLCJyb2xlIjoidXNlciIsImlhdCI6MTc0NTY3OTIwNCwiZXhwIjoxNzQ1Njg2NDA0fQ.ohvV1BK_w2Ahf_-ZoKp1Ql36uDucWI6KO5ak5ERWJCo
+GET http://localhost:3000/project/681b32b9c579e453de054175
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2ODFiMzE3MGM1NzllNDUzZGUwNTQxNGMiLCJyb2xlIjoidXNlciIsImlhdCI6MTc0NjYxMjYyMywiZXhwIjoxNzQ2NjE5ODIzfQ.kjNdHH1zxH5SXfqe29NJ3I0G8K_hP9vt_Gz_vTjoMdY
 ###
-PATCH http://localhost:3000/project/680cf38fcf67aaa3e91c3d0a
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2ODA3NmUyMzI1MGNjODhkY2IwYjdhNjAiLCJyb2xlIjoidXNlciIsImlhdCI6MTc0NTY3OTIwNCwiZXhwIjoxNzQ1Njg2NDA0fQ.ohvV1BK_w2Ahf_-ZoKp1Ql36uDucWI6KO5ak5ERWJCo
+PATCH http://localhost:3000/project/681b32b9c579e453de054175
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2ODFiMzE3MGM1NzllNDUzZGUwNTQxNGMiLCJyb2xlIjoidXNlciIsImlhdCI6MTc0NjYxMjYyMywiZXhwIjoxNzQ2NjE5ODIzfQ.kjNdHH1zxH5SXfqe29NJ3I0G8K_hP9vt_Gz_vTjoMdY
 Content-Type: application/json
 
 {
@@ -146,22 +146,22 @@ Content-Type: application/json
 ###
 ### En el de DELETE si quieres hacerlo soft asi sirve , sino añades ?soft=false
 ###
-DELETE http://localhost:3000/project/680cf38fcf67aaa3e91c3d0a
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2ODA3NmUyMzI1MGNjODhkY2IwYjdhNjAiLCJyb2xlIjoidXNlciIsImlhdCI6MTc0NTY3OTIwNCwiZXhwIjoxNzQ1Njg2NDA0fQ.ohvV1BK_w2Ahf_-ZoKp1Ql36uDucWI6KO5ak5ERWJCo
+DELETE http://localhost:3000/project/681b32b9c579e453de054175
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2ODFiMzE3MGM1NzllNDUzZGUwNTQxNGMiLCJyb2xlIjoidXNlciIsImlhdCI6MTc0NjYxMjYyMywiZXhwIjoxNzQ2NjE5ODIzfQ.kjNdHH1zxH5SXfqe29NJ3I0G8K_hP9vt_Gz_vTjoMdY
 ###
 GET http://localhost:3000/project/archived
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2ODA3NmUyMzI1MGNjODhkY2IwYjdhNjAiLCJyb2xlIjoidXNlciIsImlhdCI6MTc0NTY3OTIwNCwiZXhwIjoxNzQ1Njg2NDA0fQ.ohvV1BK_w2Ahf_-ZoKp1Ql36uDucWI6KO5ak5ERWJCo
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2ODFiMzE3MGM1NzllNDUzZGUwNTQxNGMiLCJyb2xlIjoidXNlciIsImlhdCI6MTc0NjYxMjYyMywiZXhwIjoxNzQ2NjE5ODIzfQ.kjNdHH1zxH5SXfqe29NJ3I0G8K_hP9vt_Gz_vTjoMdY
 ###
-PATCH http://localhost:3000/project/680cf38fcf67aaa3e91c3d0a/restore
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2ODA3NmUyMzI1MGNjODhkY2IwYjdhNjAiLCJyb2xlIjoidXNlciIsImlhdCI6MTc0NTY3OTIwNCwiZXhwIjoxNzQ1Njg2NDA0fQ.ohvV1BK_w2Ahf_-ZoKp1Ql36uDucWI6KO5ak5ERWJCo
+PATCH http://localhost:3000/project/681b32b9c579e453de054175/restore
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2ODFiMzE3MGM1NzllNDUzZGUwNTQxNGMiLCJyb2xlIjoidXNlciIsImlhdCI6MTc0NjYxMjYyMywiZXhwIjoxNzQ2NjE5ODIzfQ.kjNdHH1zxH5SXfqe29NJ3I0G8K_hP9vt_Gz_vTjoMdY
 ###
 POST http://localhost:3000/deliverynote
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2ODA3NmUyMzI1MGNjODhkY2IwYjdhNjAiLCJyb2xlIjoidXNlciIsImlhdCI6MTc0NTc1NDgyNiwiZXhwIjoxNzQ1NzYyMDI2fQ.d9fI6B1UO7tj0Rrhy51WL63BzmMh1e3cRKPxHvSIT7Y
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2ODFiMzE3MGM1NzllNDUzZGUwNTQxNGMiLCJyb2xlIjoidXNlciIsImlhdCI6MTc0NjYxMjYyMywiZXhwIjoxNzQ2NjE5ODIzfQ.kjNdHH1zxH5SXfqe29NJ3I0G8K_hP9vt_Gz_vTjoMdY
 Content-Type: application/json
 
 {
-  "client": "680a09472adc0bd9e9c8d744",
-  "project": "680cf38fcf67aaa3e91c3d0a",
+  "client": "681b3207c579e453de05415d",
+  "project": "681b32b9c579e453de054175",
   "description": "Instalación eléctrica de oficinas",
   "materials": [
     {
@@ -182,16 +182,16 @@ Content-Type: application/json
 }
 ###
 GET http://localhost:3000/deliverynote
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2ODA3NmUyMzI1MGNjODhkY2IwYjdhNjAiLCJyb2xlIjoidXNlciIsImlhdCI6MTc0NTY5NTA2NywiZXhwIjoxNzQ1NzAyMjY3fQ.f2es_E22ui1aHsTvHSRS1wyQcPVFLbK4G3z8qpok8TQ
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2ODFiMzE3MGM1NzllNDUzZGUwNTQxNGMiLCJyb2xlIjoidXNlciIsImlhdCI6MTc0NjYxMjYyMywiZXhwIjoxNzQ2NjE5ODIzfQ.kjNdHH1zxH5SXfqe29NJ3I0G8K_hP9vt_Gz_vTjoMdY
 ###
-GET http://localhost:3000/deliverynote/680d3181481be742e6cd1b16
-Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2ODA3NmUyMzI1MGNjODhkY2IwYjdhNjAiLCJyb2xlIjoidXNlciIsImlhdCI6MTc0NTc1NDgyNiwiZXhwIjoxNzQ1NzYyMDI2fQ.d9fI6B1UO7tj0Rrhy51WL63BzmMh1e3cRKPxHvSIT7Y
+GET http://localhost:3000/deliverynote/681b337cc579e453de05418a
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2ODFiMzE3MGM1NzllNDUzZGUwNTQxNGMiLCJyb2xlIjoidXNlciIsImlhdCI6MTc0NjYxMjYyMywiZXhwIjoxNzQ2NjE5ODIzfQ.kjNdHH1zxH5SXfqe29NJ3I0G8K_hP9vt_Gz_vTjoMdY
 ###
-GET http://localhost:3000/deliverynote/pdf/680d3181481be742e6cd1b16
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2ODA3NmUyMzI1MGNjODhkY2IwYjdhNjAiLCJyb2xlIjoidXNlciIsImlhdCI6MTc0NTc1NDgyNiwiZXhwIjoxNzQ1NzYyMDI2fQ.d9fI6B1UO7tj0Rrhy51WL63BzmMh1e3cRKPxHvSIT7Y
+GET http://localhost:3000/deliverynote/pdf/681b337cc579e453de05418a
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2ODFiMzE3MGM1NzllNDUzZGUwNTQxNGMiLCJyb2xlIjoidXNlciIsImlhdCI6MTc0NjYxMjYyMywiZXhwIjoxNzQ2NjE5ODIzfQ.kjNdHH1zxH5SXfqe29NJ3I0G8K_hP9vt_Gz_vTjoMdY
 ###
-DELETE http://localhost:3000/deliverynote/680e1e907cb5c5c394b29d15
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2ODA3NmUyMzI1MGNjODhkY2IwYjdhNjAiLCJyb2xlIjoidXNlciIsImlhdCI6MTc0NTc1NDgyNiwiZXhwIjoxNzQ1NzYyMDI2fQ.d9fI6B1UO7tj0Rrhy51WL63BzmMh1e3cRKPxHvSIT7Y
+DELETE http://localhost:3000/deliverynote/681b337cc579e453de05418a
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2ODFiMzE3MGM1NzllNDUzZGUwNTQxNGMiLCJyb2xlIjoidXNlciIsImlhdCI6MTc0NjYxMjYyMywiZXhwIjoxNzQ2NjE5ODIzfQ.kjNdHH1zxH5SXfqe29NJ3I0G8K_hP9vt_Gz_vTjoMdY
 ###
 ###Este ultimo es para probar que el slack funciona correctamente
 ###
